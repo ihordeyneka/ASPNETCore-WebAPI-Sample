@@ -21,9 +21,12 @@ stages:
       vmImage: ubuntu-latest
     steps:
     - task: Docker@2
-      displayName: Build an image
+      displayName: Build and Push to ACR
       inputs:
-        command: build
+        command: buildAndPush
+        repository: multistage
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+        containerRegistry: crunivisia
         tags: |
-          $(tag)
+          $(Build.BuildId)
+          latest
