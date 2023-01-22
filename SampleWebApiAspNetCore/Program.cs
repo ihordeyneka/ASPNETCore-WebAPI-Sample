@@ -37,8 +37,11 @@ builder.Services.AddSingleton<IUrlHelperFactory, UrlHelperFactory>();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddVersioning();
 
-builder.Services.AddDbContext<FoodDbContext>(opt =>
-    opt.UseInMemoryDatabase("FoodDatabase"));
+//builder.Services.AddDbContext<FoodDbContext>(opt =>
+//    opt.UseInMemoryDatabase("FoodDatabase"));
+
+builder.Services.AddDbContext<FoodDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MyDbConnection")));
 
 builder.Services.AddAutoMapper(typeof(FoodMappings));
 
